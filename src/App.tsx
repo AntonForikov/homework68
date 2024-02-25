@@ -1,10 +1,16 @@
 import TodoList from './container/TodoList/TodoList';
+import Header from './components/Header/Header';
+import AddTodo from './components/AddTodo/AddTodo';
 
 function App() {
 
   return (
     <>
-      <TodoList/>
+      <Header/>
+      <AddTodo />
+      <main>
+        <TodoList/>
+      </main>
     </>
   );
 }

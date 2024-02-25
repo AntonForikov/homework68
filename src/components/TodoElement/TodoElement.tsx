@@ -10,7 +10,7 @@ const TodoElement: React.FC<Props> = ({title,done}) => {
     <main className='d-flex justify-content-between align-items-center border border-primary m-3 p-2 rounded'>
       <h3>{title}</h3>
       <div className="form-check">
-        <input className="form-check-input" type="checkbox" value="" checked={done}/>
+        <input className="form-check-input" type="checkbox" checked={done}/>
       </div>
     </main>
   );
