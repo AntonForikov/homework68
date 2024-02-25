@@ -13,7 +13,8 @@ const TodoList: React.FC = () => {
   const fetchTodos = useCallback(async () => {
     try{
       dispatch(fetchTodosStarted());
-      const response = await axiosApi.get<null | string>('tasks.json');
+      const response = await axiosApi.get<null | any>('/tasks.json');
+      console.log(response.data)
       if (response.data === null) {
         console.log(response.data);
         dispatch(fetchTodosSuccess('hardcoded title'));
@@ -31,7 +32,7 @@ const TodoList: React.FC = () => {
 
   return (
     <>
-      <TodoElement done={todoDone} title={todoTitile} id='1' />
+      {/*<TodoElement done={todoDone} title={todoTitile} id='1' />*/}
       <TodoElement done={false} title='Test1' id='2' />
     </>
   );
