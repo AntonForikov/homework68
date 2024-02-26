@@ -1,39 +1,30 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import TodoElement from '../../components/TodoElement/TodoElement';
-import axiosApi from '../../axiosApi';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../app/store';
-import {fetchTodosFailure, fetchTodosStarted, fetchTodosSuccess} from '../todoListSlice';
+import {getData} from '../todoListSlice';
+
 
 const TodoList: React.FC = () => {
-  const todoTitile = useSelector((state:RootState) => state.todos.title);
-  const todoDone = useSelector((state:RootState) => state.todos.done);
+  const todoTitle = useSelector((state:RootState) => state.todos.apiData.title);
+  const todoDone = useSelector((state:RootState) => state.todos.apiData.done);
+  const isLoading = useSelector((state:RootState) => state.todos.loading);
+  const failure = useSelector((state:RootState) => state.todos.error);
   const dispatch: AppDispatch = useDispatch();
 
-  const fetchTodos = useCallback(async () => {
-    try{
-      dispatch(fetchTodosStarted());
-      const response = await axiosApi.get<null | any>('/tasks.json');
-      console.log(response.data)
-      if (response.data === null) {
-        console.log(response.data);
-        dispatch(fetchTodosSuccess('hardcoded title'));
-      } else {
-        dispatch(fetchTodosSuccess(response.data));
-      }
-    } catch {
-      fetchTodosFailure();
-    }
-  }, [dispatch]);
-
   useEffect(() => {
-    void fetchTodos();
-  }, [fetchTodos]);
+    dispatch(getData);
+  }, [dispatch]);
 
   return (
     <>
-      {/*<TodoElement done={todoDone} title={todoTitile} id='1' />*/}
-      <TodoElement done={false} title='Test1' id='2' />
+      {failure ? <h1 className='ms-3'>Please check URL!</h1>
+      : isLoading
+          ? <div className='d-flex justify-content-center'><div className="spinner-border text-primary"></div></div>
+          : todoTitle === '' && !isLoading
+            ? <h1>There is no data in database</h1>
+            : <TodoElement done={todoDone} title={todoTitle} id='2' />
+      }
     </>
   );
 };
