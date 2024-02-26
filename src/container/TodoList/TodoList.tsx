@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import TodoElement from '../../components/TodoElement/TodoElement';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../app/store';
-import {getData} from '../todoListSlice';
+import {getData} from './todoThunks';
+
 
 
 const TodoList: React.FC = () => {
@@ -12,9 +13,8 @@ const TodoList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getData);
+    dispatch(getData());
   }, [dispatch]);
-
   return (
     <>
       {failure ? <h1 className='ms-3'>Please check URL!</h1>

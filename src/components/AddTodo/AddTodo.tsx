@@ -1,8 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../app/store';
-import {addTitle} from '../../container/todoListSlice';
-import axiosApi from '../../axiosApi';
+import {addTitle} from '../../container/TodoList/todoListSlice';
 
 const AddTodo: React.FC = () => {
   const input = useSelector((state: RootState) => state.todos.todoCandidate);
@@ -10,11 +9,12 @@ const AddTodo: React.FC = () => {
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await axiosApi.post('/tasks.json', input);
-    } catch {
-      alert('Please check URL');
-    }
+    // try {
+    //   await axiosApi.post('/tasks.json', input);
+    // } catch {
+    //   alert('Please check URL');
+    // }
+    // await dispatch(addNewTodo(input));
   };
   return (
     <form onSubmit={onFormSubmit} className='d-flex align-items-center m-3 justify-content-between'>
