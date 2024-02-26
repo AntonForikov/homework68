@@ -3,6 +3,10 @@ export interface Task {
   done: boolean,
 }
 
-export interface TaskApi {
+export interface TaskFromApi {
   [id: string]: Task
+}
+
+export interface TaskWithId extends Task {
+  id: string
 }

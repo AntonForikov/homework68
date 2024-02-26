@@ -2,14 +2,19 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../app/store';
 import {addTitle} from '../../container/todoListSlice';
+import axiosApi from '../../axiosApi';
 
 const AddTodo: React.FC = () => {
-  const input = useSelector((state: RootState) => state.todos.todoCandidate.title);
+  const input = useSelector((state: RootState) => state.todos.todoCandidate);
   const dispatch: AppDispatch = useDispatch();
 
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.currentTarget[0]);
+    try {
+      await axiosApi.post('/tasks.json', input);
+    } catch {
+      alert('Please check URL');
+    }
   };
   return (
     <form onSubmit={onFormSubmit} className='d-flex align-items-center m-3 justify-content-between'>
@@ -21,7 +26,7 @@ const AddTodo: React.FC = () => {
         name='title'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => dispatch(addTitle(e.target.value))}
         required
-        value={input}
+        value={input.title}
       />
       <button type="submit" className="btn btn-primary ms-3" style={{width: 130}}>Add ToDO</button>
     </form>
