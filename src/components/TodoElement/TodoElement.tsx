@@ -23,7 +23,7 @@ const TodoElement: React.FC<Props> = ({id, title,done, onDelete}) => {
           <label htmlFor={id}>Done:</label>
           <input
             id={id}
-            className="form-check-input ms-2  "
+            className="form-check-input ms-2"
             type="checkbox"
             checked={done}
             onChange={changeDone}

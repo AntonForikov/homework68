@@ -1,4 +1,4 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
 import {TaskFromApi, TaskWithId} from '../../types';
 import {RootState} from '../../app/store';
@@ -15,6 +15,8 @@ export const getData = createAsyncThunk(
     }
   }
 );
+
+export const addTitle = createAction('todo/addTitle', (newTitle: string) => ({payload: newTitle}));
 
 export const sendData = createAsyncThunk<void, undefined, {state: RootState}> (
   'todo/send',

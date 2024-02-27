@@ -1,8 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../app/store';
-import {addTitle} from '../../container/TodoList/todoListSlice';
-import {getData, sendData} from '../../container/TodoList/todoThunks';
+
+import {addTitle, getData, sendData} from '../../container/TodoList/todoThunks';
 
 const AddTodo: React.FC = () => {
   const input = useSelector((state: RootState) => state.todos.todoCandidate);

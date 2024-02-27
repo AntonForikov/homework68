@@ -1,6 +1,6 @@
-import {createAction, createSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {Task, TaskWithId} from '../../types';
-import {changeDoneStatus, getData} from './todoThunks';
+import {addTitle, changeDoneStatus, getData} from './todoThunks';
 
 interface TodoSlice {
   todoCandidate: Task,
@@ -48,4 +48,3 @@ export const todoSlice = createSlice({
 });
 
 export const todosReducer = todoSlice.reducer;
-export const addTitle = createAction('todo/addTitle', (newTitle: string) => ({payload: newTitle}));
