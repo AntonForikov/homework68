@@ -1,6 +1,5 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
 import {Task, TaskWithId} from '../../types';
-import axiosApi from '../../axiosApi';
 import {getData} from './todoThunks';
 
 interface TodoSlice {
@@ -47,10 +46,3 @@ export const todoSlice = createSlice({
 
 export const todosReducer = todoSlice.reducer;
 export const addTitle = createAction('todo/addTitle', (newTitle: string) => ({payload: newTitle}));
-export const addNewTodo = async (data: TodoSlice) => {
-  try {
-    await axiosApi.post('/tasks.json', data.todoCandidate);
-  } catch {
-    alert('Please check URL!');
-  }
-};

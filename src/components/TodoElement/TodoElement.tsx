@@ -4,8 +4,9 @@ interface Props {
   id: string,
   title: string,
   done: boolean,
+  onDelete: () => void
 }
-const TodoElement: React.FC<Props> = ({id, title,done}) => {
+const TodoElement: React.FC<Props> = ({id, title,done, onDelete}) => {
   const changeDone = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e);
     console.log("Click");
@@ -27,6 +28,7 @@ const TodoElement: React.FC<Props> = ({id, title,done}) => {
         </div>
         <button
           className='btn btn-danger'
+          onClick={onDelete}
         >
           Delete
         </button>
