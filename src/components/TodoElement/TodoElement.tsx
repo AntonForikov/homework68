@@ -1,4 +1,7 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
+import {changeDoneStatus} from '../../container/TodoList/todoThunks';
+import {AppDispatch} from '../../app/store';
 
 interface Props {
   id: string,
@@ -7,9 +10,9 @@ interface Props {
   onDelete: () => void
 }
 const TodoElement: React.FC<Props> = ({id, title,done, onDelete}) => {
-  const changeDone = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
-    console.log("Click");
+  const dispatch: AppDispatch = useDispatch();
+  const changeDone = () => {
+    dispatch(changeDoneStatus(id));
   };
 
   return (

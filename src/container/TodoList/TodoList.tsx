@@ -16,9 +16,12 @@ const TodoList: React.FC = () => {
     dispatch(getData());
   }, [dispatch]);
 
-  const onDelete = (id: string) => {
-    dispatch(deleteData(id));
-    dispatch(getData());
+  const onDelete = async (id: string) => {
+    const confirmation = confirm('Are you sure?');
+    if (confirmation) {
+      await dispatch(deleteData(id));
+      await dispatch(getData());
+    }
   };
   return (
     <>
@@ -27,7 +30,12 @@ const TodoList: React.FC = () => {
           ? <div className='d-flex justify-content-center'><div className="spinner-border text-primary"></div></div>
           : todos.length < 1 && !isLoading
             ? <h1 className='ms-3'>There is no data in database</h1>
-            : todos.map((todo) => <TodoElement key={todo.id} id={todo.id} done={todo.done} title={todo.title} onDelete={() => onDelete(todo.id)}/>)
+            : todos.map((todo) => <TodoElement
+              key={todo.id} id={todo.id}
+              done={todo.done}
+              title={todo.title}
+              onDelete={() => onDelete(todo.id)}
+            />)
       }
     </>
   );

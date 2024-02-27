@@ -1,6 +1,6 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
 import {Task, TaskWithId} from '../../types';
-import {getData} from './todoThunks';
+import {changeDoneStatus, getData} from './todoThunks';
 
 interface TodoSlice {
   todoCandidate: Task,
@@ -40,6 +40,9 @@ export const todoSlice = createSlice({
     });
     builder.addCase(addTitle, (state, action) => {
       state.todoCandidate.title = action.payload;
+    });
+    builder.addCase(changeDoneStatus.fulfilled, (state,action) => {
+      state.apiData = action.payload;
     });
   }
 });
